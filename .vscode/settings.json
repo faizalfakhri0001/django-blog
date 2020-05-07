@@ -1,0 +1,7 @@
+{
+    "python.pythonPath": "c:\\Users\\Faizal\\Desktop\\mysite\\Env\\Scripts\\python.exe",
+
+    "python.linting.pylintArgs": ["--load-plugins", "pylint_django", "--errors-only"],
+    
+    "python.linting.enabled": true
+}
