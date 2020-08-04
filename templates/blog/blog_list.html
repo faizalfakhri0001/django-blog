@@ -1,9 +1,16 @@
+{% extends 'base.html' %}
 {% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock style %}
+
+
+{% block content %}
 <div class="row m-auto">
     <div class="col-md-7 col-lg-8 col-sm-6">
-        <div class="container">
-
-            {% for artikel in last_artikel %}
+        <div class="container mt-7">
+            {% for artikel in artikels %}
             <div class="row">
                 <div class="col-lg-6">
                     <img src="{% static 'img/bird1.jpg' %}" class="img-fluid">
@@ -17,35 +24,48 @@
             </div>
             {% endfor %}
 
-            <!-- <div class="row">
+            {% if is_paginated %}
+            <div class="row">
                 <div class="col-12">
                     <div class="d-flex justify-content-center w-100">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
+                                {% if page_obj.has_previous %}
                                 <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
+                                    <a class="page-link" href="{% url 'blog:list' page_obj.previous_page_number %}"
+                                        aria-label="Previous">
                                         <span aria-hidden="true">&laquo;</span>
                                         <span class="sr-only">Previous</span>
                                     </a>
                                 </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                    <span class="sr-only">Next</span>
-                                </a>
+                                {% endif %}
+
+
+                                {% for page in paginator.page_range %}
+                                <li class="page-item"><a class="page-link"
+                                        href="{% url 'blog:list' page %}">{{page}}</a>
                                 </li>
+                                {% endfor %}
+
+                                {% if page_obj.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="{% url 'blog:list' page_obj.next_page_number %}"
+                                        aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+                                {% endif %}
                             </ul>
                         </nav>
                     </div>
                 </div>
-            </div> -->
+            </div>
+            {% endif %}
         </div>
     </div>
     <div class="col-md-5 col-lg-4 col-sm-6">
-        <div class="container side-bar">
+        <div class="container side-bar mt-7">
             <form class="form w-75 m-auto">
                 <div class="input-group">
                     <input class="form-control" type="text" placeholder="Search" aria-label="Search"
@@ -59,12 +79,13 @@
             </form>
             <div class="d-flex flex-column justify-content-around category text-center">
                 <h4>Kategori</h4>
-                {% for artikel in last_artikel %}
+                {% for kat in kategori_list %}
                 <a href="#">
-                    <h6>{{artikel.kategori}}</h6>
+                    <h6>{{kat}}</h6>
                 </a>
                 {% endfor %}
             </div>
         </div>
     </div>
 </div>
+{% endblock content %}

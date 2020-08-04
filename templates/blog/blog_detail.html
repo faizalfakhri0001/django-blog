@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock style %}
+
+
+{% block content %}
+<div class="container mt-7">
+    <h1>{{artikels.judul}}</h1>
+    <h6>Kategori: {{artikels.kategori}} | {{artikels.published}}</h3>
+        <p class="text-justify">{{artikels.isi}}</p>
+</div>
+{% endblock content %}
