@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock style %}
+
+
+{% block content %}
+<div class="container mt-7 text-center">
+    <h1>Manage Article</h1>
+</div>
+<div class="container mt-3 text-center">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">Judul</th>
+                <th scope="col">Kategori</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for artikel in artikels  %}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{artikel.judul}}</td>
+                <td>{{artikel.kategori}}</td>
+                <td>
+                    <a href="{% url 'blog:update' artikel.id %}" class="btn btn-danger">Edit</a>
+                    <a href="{% url 'blog:delete' artikel.id %}" class="btn btn-warning">Hapus</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

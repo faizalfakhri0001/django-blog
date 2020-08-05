@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock style %}
+
+
+{% block content %}
+<div class="container mt-7">
+    <h1>Delete Article</h1>
+    <p>Are you sure for delete this article?</p>
+</div>
+<div class="container mt-3">
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-primary">Ya</button>
+        <a href="{% url 'blog:manage' %}" class="btn btn-outline-danger">Tidak</a>
+    </form>
+</div>
+{% endblock content %}

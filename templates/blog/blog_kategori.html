@@ -32,7 +32,8 @@
                             <ul class="pagination">
                                 {% if page_obj.has_previous %}
                                 <li class="page-item">
-                                    <a class="page-link" href="{% url 'blog:list' page_obj.previous_page_number %}"
+                                    <a class="page-link"
+                                        href="{% url 'blog:category' kategori page_obj.previous_page_number %}"
                                         aria-label="Previous">
                                         <span aria-hidden="true">&laquo;</span>
                                         <span class="sr-only">Previous</span>
@@ -43,13 +44,14 @@
 
                                 {% for page in paginator.page_range %}
                                 <li class="page-item"><a class="page-link"
-                                        href="{% url 'blog:list' page %}">{{page}}</a>
+                                        href="{% url 'blog:category' kategori page %}">{{page}}</a>
                                 </li>
                                 {% endfor %}
 
                                 {% if page_obj.has_next %}
                                 <li class="page-item">
-                                    <a class="page-link" href="{% url 'blog:list' page_obj.next_page_number %}"
+                                    <a class="page-link"
+                                        href="{% url 'blog:category' kategori page_obj.next_page_number %}"
                                         aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                         <span class="sr-only">Next</span>

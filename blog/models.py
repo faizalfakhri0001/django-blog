@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from django.urls import reverse
 
 
 # Create your models here.
@@ -15,9 +16,9 @@ class Artikel(models.Model):
         self.slug = slugify(self.judul)
         super().save()
 
-    # def get_absolute_url(self):
-    #     url_slug = {'slug': self.slug}
-    #     return reverse("", kwargs=url_slug)
+    def get_absolute_url(self):
+        url_slug = {'slug': self.slug}
+        return reverse('blog:detail', kwargs=url_slug)
 
     def __str__(self):
         return f"{self.id}.{self.judul}"
