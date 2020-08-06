@@ -7,30 +7,31 @@ from django.views.generic import(
     CreateView,
     ListView,
 )
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 from .models import Artikel
 from .forms import AddForm, EditForm
 
 
-class BlogUpdate(UpdateView):
+class BlogUpdate(LoginRequiredMixin, UpdateView):
     model = Artikel
     form_class = EditForm
     template_name = "blog/blog_update.html"
 
 
-class BlogDelete(DeleteView):
+class BlogDelete(LoginRequiredMixin, DeleteView):
     model = Artikel
     template_name = "blog/blog_delete.html"
     success_url = reverse_lazy('blog:manage')
 
 
-class BlogManage(ListView):
+class BlogManage(LoginRequiredMixin, ListView):
     model = Artikel
     template_name = "blog/blog_manage.html"
     context_object_name = 'artikels'
 
 
-class BlogCreate(CreateView):
+class BlogCreate(LoginRequiredMixin, CreateView):
     form_class = AddForm
     template_name = "blog/blog_create.html"
 

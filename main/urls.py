@@ -5,6 +5,8 @@ from .views import Home
 from blog.models import Artikel
 
 urlpatterns = [
+    path('account/', include('account.urls')),
+    path('account/', include('django.contrib.auth.urls')),
     path('blog/', include('blog.urls', namespace='blog')),
     path('', Home.as_view(), name='home'),
     path('admin/', admin.site.urls),

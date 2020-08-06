@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock style %}
+
+
+{% block content %}
+<div class="container mt-7 text-center">
+    <h1>User Login</h1>
+</div>
+<div class="container">
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <br>
+        <button type="submit" class="btn btn-primary w-100">login</button>
+    </form>
+</div>
+{% endblock content %}
