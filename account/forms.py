@@ -30,6 +30,6 @@ class UserRegister(UserCreationForm):
 
 class LoginForm(AuthenticationForm):
     username = forms.CharField(label="Username", max_length=30,
-                               widget=forms.TextInput(attrs={'class': 'form-control', 'type': 'text', 'id': 'username'}))
+                               widget=forms.TextInput(attrs={'type': 'text', 'id': 'username'}))
     password = forms.CharField(label="Password", max_length=30,
-                               widget=forms.TextInput(attrs={'class': 'form-control', 'type': 'password', 'id': 'password'}))
+                               widget=forms.TextInput(attrs={'type': 'password', 'id': 'password'}))

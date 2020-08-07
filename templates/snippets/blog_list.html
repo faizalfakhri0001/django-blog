@@ -60,8 +60,8 @@
             <div class="d-flex flex-column justify-content-around category text-center">
                 <h4>Kategori</h4>
                 {% for artikel in last_artikel %}
-                <a href="{% url 'blog:category' artikel.kategori 1 %}">
-                    <h6>{{artikel.kategori}}</h6>
+                <a class="btn-category btn btn-outline-info mb-2" href="{% url 'blog:category' artikel.kategori 1 %}">
+                    {{artikel.kategori}}
                 </a>
                 {% endfor %}
             </div>
