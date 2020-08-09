@@ -12,6 +12,9 @@ from .views import(
     BlogUpdate,
 )
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 app_name = 'blog'
 
 urlpatterns = [
@@ -25,4 +28,4 @@ urlpatterns = [
             BlogCategory.as_view(), name='category'),
     re_path(r'^detail/(?P<slug>[\w-]+)$', BlogDetail.as_view(), name='detail'),
     re_path(r'^(?P<page>\d+)$', BlogList.as_view(), name='list'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,5 +1,4 @@
-/*//////////////////////////////////////////////////////////////////
-[ FONT ]*/
+/*///////////////////////////////[ FONT ]///////////////////////////////////////*/
 
 @font-face {
   font-family: SourceSansPro-Regular;
@@ -21,18 +20,20 @@
   src: url('../fonts/JosefinSans/JosefinSans-Bold.ttf'); 
 }
 
-/*//////////////////////////////////////////////////////////////////
-[ RESTYLE TAG ]*/
-
 * {
-	margin: 0px; 
-	padding: 0px; 
-	box-sizing: border-box;
+	margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body, html {
-	height: 100%;
-	font-family: SourceSansPro-Regular, sans-serif;
+body {
+	font-family: "Poppins", sans-serif;
+	font-weight: 400;
+  font-size: 16px;
+  height: 100%;
+	position: relative;
+  z-index: auto;
+  background-color: #d0d0d0 !important;
 }
 
 /*---------------------------------------------*/
@@ -63,7 +64,7 @@ h1,h2,h3,h4,h5,h6 {
 
 p {
 	font-family: SourceSansPro-Regular;
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 1.7;
 	color: #666666;
 	margin: 0px;

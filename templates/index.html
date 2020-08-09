@@ -12,3 +12,12 @@
 {% include 'snippets/blog_list.html' %}
 
 {% endblock content %}
+
+
+{% block scripts %}
+<script>
+    $(document).ready(function () {
+        $(".owl-carousel").owlCarousel();
+    });
+</script>
+{% endblock scripts %}

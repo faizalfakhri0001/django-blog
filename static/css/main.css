@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Galada&display=swap');
+/*///////////////////////////[ FONT ]////////////////////////////*/
 
-/*//////////////////////////////////////////////////////////////////
-[ FONT ]*/
+@import url('https://fonts.googleapis.com/css2?family=Galada&display=swap');
 
 @font-face {
     font-family: SourceSansPro-Regular;
@@ -54,6 +53,11 @@ div ul li a.nav-link {
 .box {
     margin: 2rem 10rem 2rem 10rem;
 }
+
+.box-title {
+    margin-bottom: -7px;
+}
+
 .side-bar {
     margin-top: 20px;
 }
@@ -120,11 +124,16 @@ div ul li a.nav-link {
     color: #bb0000;
 }
 
+.fa-github-alt {
+    color: #555555;
+}
+
 .fa-facebook:hover,
 .fa-twitter:hover,
 .fa-google-plus-g:hover,
 .fa-instagram:hover,
-.fa-youtube:hover {
+.fa-youtube:hover,
+.fa-github-alt:hover{
 color: #d5d5d5;
 }
 
@@ -176,7 +185,8 @@ footer {
 
 @media screen and (max-width: 576px) {
     .box {
-        margin: 2rem 2rem 2rem 2rem;
+        margin: auto;
+        width: 75%;
     }
     .container form.form {
         display: none;
@@ -191,6 +201,9 @@ footer {
     }
     .social-form-title {
         margin-top: 1rem;
+    }
+    .w-50 {
+        width: 100% !important;
     }
 }
   
