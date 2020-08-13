@@ -8,48 +8,29 @@
     <div class="container">
         <div class="row">
             {% for artikel in last_artikel %}
-            {% if forloop.counter == 1 %}
-            <div class="col-12 col-lg-6">
-                <div class="single-post-area">
-                    <!-- Post Thumbnail -->
-                    <a href="{% url 'blog:detail' artikel.slug %}" class="post-thumbnail"><img
-                            src="{{artikel.thumbnail.url}}" alt=""></a>
-                    <!-- Post Catagory -->
-                    <a href="{% url 'blog:category' artikel.kategori 1 %}"
-                        class="btn post-catagory">{{artikel.kategori}}</a>
-                    <!-- Post Conetent -->
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <a href="#">{{artikel.published}}</a>
-                            <a href="#">3 Comment</a>
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="shadow">
+                    <div class="single-post-area">
+                        <!-- Post Thumbnail -->
+                        <a href="{% url 'blog:detail' artikel.slug %}" class="post-thumbnail"><img
+                                src="{{artikel.thumbnail.url}}" alt=""></a>
+                        <!-- Post Catagory -->
+                        <a href="{% url 'blog:category' artikel.kategori.slug 1 %}"
+                            class="btn post-catagory">{{artikel.kategori}}</a>
+                    </div>
+                    <div class="post-content-wrap">
+                        <div class="container post-content-sm">
+                            <div class="post-meta">
+                                <p>{{artikel.isi|truncatewords:12|safe}}</p>
+                                <br>
+                                <a href="#">{{artikel.published}}</a>
+                                <a href="#">3 Comment</a>
+                            </div>
+                            <a href="{% url 'blog:detail' artikel.slug %}" class="post-title">{{artikel.judul}}</a>
                         </div>
-                        <a href="{% url 'blog:detail' artikel.slug %}" class="post-title">{{artikel.judul}}</a>
                     </div>
                 </div>
             </div>
-            {% else %}
-            <div class="col-12 col-sm-6 col-lg-3">
-                <div class="single-post-area">
-                    <!-- Post Thumbnail -->
-                    <a href="{% url 'blog:detail' artikel.slug %}" class="post-thumbnail"><img
-                            src="{{artikel.thumbnail.url}}" alt=""></a>
-                    <!-- Post Catagory -->
-                    <a href="{% url 'blog:category' artikel.kategori 1 %}"
-                        class="btn post-catagory">{{artikel.kategori}}</a>
-                </div>
-                <div class="container post-content-wrap shadow-lg">
-                    <!-- Post Conetent -->
-                    <div class="post-content-sm">
-                        <div class="post-meta">
-                            <p>{{artikel.isi|truncatewords:12|safe}}</p>
-                            <a href="#">{{artikel.published}}</a>
-                            <a href="#">3 Comment</a>
-                        </div>
-                        <a href="{% url 'blog:detail' artikel.slug %}" class="post-title">{{artikel.judul}}</a>
-                    </div>
-                </div>
-            </div>
-            {% endif %}
             {% endfor %}
         </div>
     </div>
@@ -64,7 +45,7 @@
     <div class="row">
         <div class="col-12 text-center">
             {% for artikel in last_artikel %}
-            <a href="{% url 'blog:category' artikel.kategori 1 %}" class="btn btn-outline-dark btn-category m-2">
+            <a href="{% url 'blog:category' artikel.kategori.slug 1 %}" class="btn btn-outline-dark btn-category m-2">
                 {{artikel.kategori|upper}} </a>
             {% endfor %}
         </div>

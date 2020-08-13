@@ -24,7 +24,7 @@ urlpatterns = [
             BlogDelete.as_view(), name='delete'),
     path('manage/', BlogManage.as_view(), name='manage'),
     path('tambah/', BlogCreate.as_view(), name='create'),
-    re_path(r'^kategori/(?P<kategori>[\w]+)/(?P<page>\d+)$',
+    re_path(r'^kategori/(?P<slug>[\w-]+)/(?P<page>\d+)$',
             BlogCategory.as_view(), name='category'),
     re_path(r'^detail/(?P<slug>[\w-]+)$', BlogDetail.as_view(), name='detail'),
     re_path(r'^(?P<page>\d+)$', BlogList.as_view(), name='list'),

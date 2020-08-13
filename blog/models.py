@@ -2,19 +2,52 @@ from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
 from PIL import Image
+from django.utils import timezone
+from django.contrib.auth.models import User
 
 from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
-# Create your models here.
+class Category(models.Model):
+    name = models.CharField(max_length=15)
+    slug = models.SlugField(blank=True, editable=False)
+
+    class Meta:
+        verbose_name_plural = 'categories'
+
+    def __str__(self):
+        return f"{self.name}"
+
+    def save(self):
+        self.slug = slugify(self.name)
+        super().save()
+
+
 class Artikel(models.Model):
+    STATUS_CHOICES = (
+        ('draft', 'Draft'),
+        ('published', 'Published'),
+    )
     judul = models.CharField(max_length=255)
     thumbnail = models.ImageField(blank=True, null=True, upload_to="images/")
-    isi = RichTextField(blank=True, null=True)
-    kategori = models.CharField(max_length=255)
-    published = models.DateTimeField(auto_now_add=True)
+    isi = RichTextUploadingField(blank=True, null=True)
+    author = models.ForeignKey(User,
+                               on_delete=models.CASCADE,
+                               related_name='artikel')
+    kategori = models.ForeignKey(Category,
+                                 on_delete=models.CASCADE,
+                                 related_name='category')
+    published = models.DateTimeField(default=timezone.now)
+    created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     slug = models.SlugField(blank=True, editable=False)
+    status = models.CharField(max_length=10,
+                              choices=STATUS_CHOICES,
+                              default='draft')
+
+    class Meta:
+        ordering = ('-published',)
 
     def save(self):
         self.slug = slugify(self.judul)
@@ -32,4 +65,4 @@ class Artikel(models.Model):
         return reverse('blog:detail', kwargs=url_slug)
 
     def __str__(self):
-        return f"{self.id}.{self.judul}"
+        return f"{self.judul}"

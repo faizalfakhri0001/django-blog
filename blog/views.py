@@ -9,7 +9,7 @@ from django.views.generic import(
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
-from .models import Artikel
+from .models import Artikel, Category
 from .forms import AddForm, EditForm
 
 
@@ -38,6 +38,7 @@ class BlogCreate(LoginRequiredMixin, CreateView):
 
 class BlogCategory(ListView):
     model = Artikel
+    # category = Category
     template_name = "blog/blog_kategori.html"
     context_object_name = 'artikels'
     ordering = ['-published']
@@ -45,12 +46,16 @@ class BlogCategory(ListView):
 
     def get_queryset(self):
         self.queryset = self.model.objects.filter(
-            kategori=self.kwargs['kategori'])
+            kategori__slug=self.kwargs['slug'])
         return super().get_queryset()
 
     def get_context_data(self, *args, **kwargs):
-        kategori_list = self.model.objects.values_list(
-            'kategori', flat=True).distinct().exclude(kategori=self.kwargs['kategori'])
+        kategori_list = self.model.objects.order_by(
+            'kategori').distinct('kategori').values_list(
+                'kategori__slug', flat=True).exclude(
+                    kategori__slug=self.kwargs['slug'])
+
+
         self.kwargs.update({'kategori_list': kategori_list})
         kwargs = self.kwargs
         return super().get_context_data(*args, **kwargs)
@@ -71,8 +76,10 @@ class BlogList(ListView):
 
     def get_context_data(self, *args, **kwargs):
         kategori_list = self.model.objects.values_list(
-            'kategori', flat=True).distinct()
-        self.kwargs.update({'kategori_list': kategori_list})
+            'kategori__slug', flat=True).distinct()
+
+        # print(set(kategori_list))
+        self.kwargs.update({'kategori_list': set(kategori_list)})
         kwargs = self.kwargs
         return super().get_context_data(*args, **kwargs)
 
@@ -82,12 +89,12 @@ class LastUpdateArtikel():
 
     def latest_artikel(self):
         last_artikel = self.model.objects.values_list(
-            'kategori', flat=True).distinct()
+            'kategori__name', flat=True)
         queryset = []
 
-        for artikels in last_artikel:
+        for artikels in set(last_artikel):
             artikel = self.model.objects.filter(
-                kategori=artikels).latest('published')
+                kategori__name=artikels).latest('published')
             queryset.append(artikel)
 
         return queryset

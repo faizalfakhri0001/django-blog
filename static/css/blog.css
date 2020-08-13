@@ -26,6 +26,11 @@
 	color: #f7f7f7;
 }
 
+/* Blog Detail */
+.detail p {
+	text-align: justify;
+}
+
 /* Blog List */
 h1,
 h2,
@@ -260,17 +265,11 @@ ul li {
 .post-content-wrap .post-content-sm {
 	padding-top: 1rem;
 	margin-top: -10px;
-	height: 185px;
-}
-
-.post-content-wrap .post-content-sm .post-meta {
-	position: relative;
-	z-index: 1;
-	margin-bottom: 5px;
+	height: 186px;
+	
 }
 
 .post-content-wrap .post-content-sm .post-meta p {
-	margin-bottom: 2px;
 	font-size: 14px;
 	font-family: 'Times New Roman', Times, serif;
 }
@@ -305,7 +304,6 @@ ul li {
 .post-content-wrap .post-content-sm .post-title {
 	font-size: 20px;
 	color: #000000;
-	margin-bottom: 0;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {

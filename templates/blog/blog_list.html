@@ -23,7 +23,7 @@
                     <!-- Post Thumbnail -->
                     <a href="#" class="post-thumbnail"><img src="{{artikel.thumbnail.url}}" alt=""></a>
                     <!-- Post Catagory -->
-                    <a href="{% url 'blog:category' artikel.kategori 1 %}"
+                    <a href="{% url 'blog:category' artikel.kategori.slug 1 %}"
                         class="btn post-catagory">{{artikel.kategori}}</a>
                     <!-- Post Conetent -->
                     <div class="post-content">
@@ -37,19 +37,26 @@
             </div>
             {% else %}
             <div class="col-12 col-sm-6 col-lg-3">
-                <div class="single-post-area">
-                    <!-- Post Thumbnail -->
-                    <a href="#" class="post-thumbnail"><img src="{{artikel.thumbnail.url}}" alt=""></a>
-                    <!-- Post Catagory -->
-                    <a href="{% url 'blog:category' artikel.kategori 1 %}"
-                        class="btn post-catagory">{{artikel.kategori}}</a>
-                    <!-- Post Conetent -->
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <a href="#">{{artikel.published}}</a>
-                            <a href="#">3 Comment</a>
+                <div class="shadow">
+                    <div class="single-post-area">
+                        <!-- Post Thumbnail -->
+                        <a href="{% url 'blog:detail' artikel.slug %}" class="post-thumbnail"><img
+                                src="{{artikel.thumbnail.url}}" alt=""></a>
+                        <!-- Post Catagory -->
+                        <a href="{% url 'blog:category' artikel.kategori.slug 1 %}"
+                            class="btn post-catagory">{{artikel.kategori}}</a>
+                    </div>
+                    <div class="post-content-wrap">
+                        <!-- Post Conetent -->
+                        <div class="container post-content-sm">
+                            <div class="post-meta">
+                                {{artikel.isi|truncatewords:12|safe}}
+                                <br>
+                                <a href="#">{{artikel.published}}</a>
+                                <a href="#">3 Comment</a>
+                            </div>
+                            <a href="{% url 'blog:detail' artikel.slug %}" class="post-title">{{artikel.judul}}</a>
                         </div>
-                        <a href="{% url 'blog:detail' artikel.slug %}" class="post-title">{{artikel.judul}}</a>
                     </div>
                 </div>
             </div>
