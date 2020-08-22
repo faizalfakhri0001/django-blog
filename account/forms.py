@@ -2,8 +2,13 @@ from django import forms
 from django.contrib.auth.forms import (
     AuthenticationForm,
     UserCreationForm,
+    UserChangeForm,
+    PasswordChangeForm,
+    PasswordResetForm,
+    SetPasswordForm,
 )
 from django.contrib.auth.models import User
+from .models import Profile
 
 
 class UserRegister(UserCreationForm):
@@ -33,3 +38,13 @@ class LoginForm(AuthenticationForm):
                                widget=forms.TextInput(attrs={'type': 'text', 'id': 'username'}))
     password = forms.CharField(label="Password", max_length=30,
                                widget=forms.TextInput(attrs={'type': 'password', 'id': 'password'}))
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['image', 'Description']
+
+        widgets = {
+            'image': forms.FileInput(attrs={'class': 'custom-file'}),
+        }

@@ -21,10 +21,8 @@
                     <div class="post-content-wrap">
                         <div class="container post-content-sm">
                             <div class="post-meta">
-                                <p>{{artikel.isi|truncatewords:12|safe}}</p>
-                                <br>
+                                <p>{{artikel.isi|truncatewords:20|safe}}</p>
                                 <a href="#">{{artikel.published}}</a>
-                                <a href="#">3 Comment</a>
                             </div>
                             <a href="{% url 'blog:detail' artikel.slug %}" class="post-title">{{artikel.judul}}</a>
                         </div>

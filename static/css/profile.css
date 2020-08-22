@@ -1,0 +1,52 @@
+.profile-info {
+    padding: 10px;
+    height: 200px;
+    text-align: center;
+    box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+    -o-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+    -ms-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+    background-color: white !important;
+}
+
+.profile-info a {
+    margin-top: 2rem;
+}
+
+.profile-info a:hover {
+    margin-top: 2rem;
+    text-decoration: none;
+}
+
+.profile-info a h1 {
+    margin-top: 2rem;
+}
+
+.card-body a {
+    color: black;
+}
+
+
+.card-body a:hover{
+    color: pink;
+    text-decoration: none;
+}
+
+
+
+/* Responsive */
+@media screen and (max-width: 999px) {
+    .name-profile {
+        margin-top: -1rem !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .name-profile {
+        margin-top: -1rem !important;
+    }
+}
+
+@media screen and (max-width: 576px) {
+}

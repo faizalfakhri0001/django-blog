@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock style %}
+
 {% block content %}
 <!-- Banner -->
 {% include 'snippets/banner.html' %}

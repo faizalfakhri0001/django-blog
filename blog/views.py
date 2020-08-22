@@ -55,7 +55,6 @@ class BlogCategory(ListView):
                 'kategori__slug', flat=True).exclude(
                     kategori__slug=self.kwargs['slug'])
 
-
         self.kwargs.update({'kategori_list': kategori_list})
         kwargs = self.kwargs
         return super().get_context_data(*args, **kwargs)
@@ -89,10 +88,10 @@ class LastUpdateArtikel():
 
     def latest_artikel(self):
         last_artikel = self.model.objects.values_list(
-            'kategori__name', flat=True)
-        queryset = []
+            'kategori__name', flat=True).order_by('kategori__name').distinct('kategori__name')
 
-        for artikels in set(last_artikel):
+        queryset = []
+        for artikels in last_artikel:
             artikel = self.model.objects.filter(
                 kategori__name=artikels).latest('published')
             queryset.append(artikel)

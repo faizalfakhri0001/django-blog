@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # Third-Party Apps
     'ckeditor',
     'ckeditor_uploader',
+    'django_extensions',
 ]
 
 # CKEDITOR

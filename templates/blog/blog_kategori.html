@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block style %}
-
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
 {% endblock style %}
 
 
@@ -28,7 +28,6 @@
                     <div class="post-content">
                         <div class="post-meta">
                             <a href="#">{{artikel.published}}</a>
-                            <a href="#">3 Comment</a>
                         </div>
                         <a href="{% url 'blog:detail' artikel.slug %}" class="post-title">{{artikel.judul}}</a>
                     </div>
@@ -52,7 +51,6 @@
                                 {{artikel.isi|truncatewords:12|safe}}
                                 <br>
                                 <a href="#">{{artikel.published}}</a>
-                                <a href="#">3 Comment</a>
                             </div>
                             <a href="{% url 'blog:detail' artikel.slug %}" class="post-title">{{artikel.judul}}</a>
                         </div>

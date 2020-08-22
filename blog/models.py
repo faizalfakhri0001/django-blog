@@ -37,7 +37,7 @@ class Artikel(models.Model):
                                related_name='artikel')
     kategori = models.ForeignKey(Category,
                                  on_delete=models.CASCADE,
-                                 related_name='category')
+                                 related_name='artikel')
     published = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
