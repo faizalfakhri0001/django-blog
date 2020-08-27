@@ -10,6 +10,7 @@ from .views import(
     BlogManage,
     BlogDelete,
     BlogUpdate,
+    BlogSearch,
 )
 
 from django.conf import settings
@@ -18,6 +19,7 @@ from django.conf.urls.static import static
 app_name = 'blog'
 
 urlpatterns = [
+    path('search/', BlogSearch.as_view(), name='search'),
     re_path(r'^manage/update/(?P<pk>\d+)$',
             BlogUpdate.as_view(), name='update'),
     re_path(r'^manage/delete/(?P<pk>\d+)$',

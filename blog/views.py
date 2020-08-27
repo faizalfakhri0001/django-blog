@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.db.models import Q
 from django.views.generic import(
     DetailView,
     DeleteView,
@@ -11,6 +12,20 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 from .models import Artikel, Category
 from .forms import AddForm, EditForm
+
+
+class BlogSearch(ListView):
+    def get(self, request, *args, **kwargs):
+        queryset = Artikel.objects.all()
+        query = request.GET.get('q')
+        # print(query)
+        if query:
+            queryset = queryset.filter(Q(judul__icontains=query)).distinct()
+
+        context = {
+            'artikels': queryset,
+        }
+        return render(request, 'blog/blog_search.html', context)
 
 
 class BlogUpdate(LoginRequiredMixin, UpdateView):
@@ -29,6 +44,12 @@ class BlogManage(LoginRequiredMixin, ListView):
     model = Artikel
     template_name = "blog/blog_manage.html"
     context_object_name = 'artikels'
+
+    def get_context_data(self, *args, **kwargs):
+        artikel = self.model.objects.filter(author=self.request.user)
+        self.kwargs.update({'artikels': artikel})
+        kwargs = self.kwargs
+        return super().get_context_data(*args, **kwargs)
 
 
 class BlogCreate(LoginRequiredMixin, CreateView):

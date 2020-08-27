@@ -12,7 +12,7 @@ from .views import(
 urlpatterns = [
     path('register/', UserRegistration.as_view(), name='register'),
     path('login/', UserLogin.as_view(), name='login'),
-    re_path(r'^profile/(?P<pk>\d+)$',
+    re_path(r'^profile/$',
             UserProfile.as_view(), name='profile'),
     re_path(r'^profile/edit/(?P<pk>\d+)$',
             UserProfileEdit.as_view(), name='profile_edit'),

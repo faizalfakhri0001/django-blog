@@ -20,10 +20,6 @@ class UserRegister(UserCreationForm):
                                 widget=forms.TextInput(attrs={'class': 'form-control', 'type': 'text', 'id': 'lastname'}))
     email = forms.EmailField(label="Email", max_length=30,
                              widget=forms.TextInput(attrs={'class': 'form-control', 'type': 'text', 'id': 'email'}))
-    password1 = forms.CharField(label="Password", max_length=30,
-                                widget=forms.TextInput(attrs={'class': 'form-control', 'type': 'password', 'id': 'password'}))
-    password2 = forms.CharField(label="Password confirmation", max_length=30,
-                                widget=forms.TextInput(attrs={'class': 'form-control', 'type': 'password', 'id': 'password'}))
 
     class Meta(UserCreationForm.Meta):
         model = User
@@ -43,8 +39,21 @@ class LoginForm(AuthenticationForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['image', 'Description']
+        fields = ['image', 'Description', 'website_name', 'website_url', 'facebook_name', 'facebook_url',
+                  'whatsapp_number', 'instagram_name', 'instagram_url', 'pinterest_name', 'pinterest_url', 'github_name', 'github_url']
 
         widgets = {
             'image': forms.FileInput(attrs={'class': 'custom-file'}),
+            'judul': forms.TextInput(attrs={'class': 'form-control'}),
+            'website_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'website_url': forms.TextInput(attrs={'class': 'form-control'}),
+            'whatsapp_number': forms.TextInput(attrs={'class': 'form-control'}),
+            'facebook_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'facebook_url': forms.TextInput(attrs={'class': 'form-control'}),
+            'instagram_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'instagram_url': forms.TextInput(attrs={'class': 'form-control'}),
+            'pinterest_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'pinterest_url': forms.TextInput(attrs={'class': 'form-control'}),
+            'github_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'github_url': forms.TextInput(attrs={'class': 'form-control'}),
         }

@@ -9,33 +9,70 @@
 {% block content %}
 <section class="mt-3">
     <div class="container">
-        <div class="row">
+        <div class="row profile-item">
             <div class="col-lg-3 col-md-12 text-center">
-                <div class="rounded-circle bg-dark" style="width: 210px; height: 210px;">
-                    <img src="{{user.profile.image.url}}" class="rounded-circle bg-light mt-1"
-                        style="width: 200px; height: 200px;">
-                </div>
+                <img src="{{user.profile.image.url}}" class="rounded-circle bg-light" alt="200x200"
+                    data-holder-rendered="true" style="height: 200px; width: 200px;">
             </div>
-            <div class="col-lg-9 col-md-12">
-                <div class="container mt-5 name-profile">
+            <div class="col-lg-3 col-md-12">
+                <div class="container name-profile text-center">
                     <h2>{{user.first_name}} {{user.last_name}}</h2>
                     <h5>{{user.email}}</h5>
-                    <a class="btn btn-info mt-2" href="{% url 'profile_edit' user.id %}">Edit Profile</a>
+                    <a class="btn btn-info mt-2" href="{% url 'profile_edit' user.profile.id %}">Edit Profile</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 item-1">
+                <div class="container text-left">
+
+                    {% if user.profile.instagram_url %}
+                    <p>Instagram: <a
+                            href="{{user.profile.instagram_url}}">{{user.profile.instagram_name|truncatechars:15}}</a>
+                    </p>
+                    {% endif %}
+                    {% if user.profile.whatsapp_number %}
+                    <p>Whatsapp: <a href="#">{{user.profile.whatsapp_number}}</a></p>
+                    {% endif %}
+                    {% if user.profile.github_url %}
+                    <p>Github: <a href="{{user.profile.github_url}}">{{user.profile.github_name|truncatechars:20}}</a>
+                    </p>
+                    {% endif %}
+                    {% if user.profile.facebook_url %}
+                    <p>Facebook: <a
+                            href="{{user.profile.facebook_url}}">{{user.profile.facebook_name|truncatechars:15}}</a></p>
+                    {% endif %}
+
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 item-2">
+                <div class="container text-left">
+
+                    {% if user.profile.website_url %}
+                    <p>Website: <a
+                            href="{{user.profile.website_url}}">{{user.profile.website_name|truncatechars:15}}</a>
+                    </p>
+                    {% endif %}
+                    {% if user.profile.pinterest_url %}
+                    <p>Pinterest: <a
+                            href="{{user.profile.pinterest_url}}">{{user.profile.pinterest_name|truncatechars:15}}</a>
+                    </p>
+                    {% endif %}
+                    <a class="btn btn-success mt-2" href="#">Download CV</a>
+
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="mt-3">
+<!-- <section class="mt-3">
     <div class="container">
         <div class="container m-auto">
             {{user.profile.Description|safe}}
         </div>
     </div>
-</section>
+</section> -->
 
-<section class="mt-3">
+<!-- <section class="mt-3">
     <div class="container text-center">
         <hr>
         <h2>Info</h2>
@@ -68,7 +105,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 <section class="mt-3">
     <div class="container text-center">
@@ -77,7 +114,7 @@
         <hr>
     </div>
 
-    <div class="container">
+    <div class="container blog-profile">
         <div class="owl-carousel owl-theme">
             {% for ar in artikels %}
             <div class="card" style="width: 18rem;">
@@ -86,7 +123,7 @@
                     <a href="{% url 'blog:detail' ar.slug %}">
                         <h5 class="card-title">{{ar.judul}}</h5>
                     </a>
-                    <p>{{ar.published}}</p>
+                    <p>{{ar.published|date}}</p>
                     <p class="card-text">{{ar.isi|truncatewords:10|safe}}</p>
                 </div>
             </div>

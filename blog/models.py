@@ -30,7 +30,8 @@ class Artikel(models.Model):
         ('published', 'Published'),
     )
     judul = models.CharField(max_length=255)
-    thumbnail = models.ImageField(blank=True, null=True, upload_to="images/")
+    thumbnail = models.ImageField(
+        blank=True, null=True, upload_to="images/", default='images/default.jpg')
     isi = RichTextUploadingField(blank=True, null=True)
     author = models.ForeignKey(User,
                                on_delete=models.CASCADE,

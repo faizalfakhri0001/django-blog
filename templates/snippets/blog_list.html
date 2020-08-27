@@ -1,51 +1,61 @@
 {% load static %}
-<div class="container text-center">
-    <hr>
-    <h2>Recent Post</h2>
-    <hr>
-</div>
-<div class="blog-area">
-    <div class="container">
-        <div class="row">
-            {% for artikel in last_artikel %}
-            <div class="col-12 col-sm-6 col-lg-4">
-                <div class="shadow">
-                    <div class="single-post-area">
-                        <!-- Post Thumbnail -->
-                        <a href="{% url 'blog:detail' artikel.slug %}" class="post-thumbnail"><img
-                                src="{{artikel.thumbnail.url}}" alt=""></a>
-                        <!-- Post Catagory -->
-                        <a href="{% url 'blog:category' artikel.kategori.slug 1 %}"
-                            class="btn post-catagory">{{artikel.kategori}}</a>
-                    </div>
-                    <div class="post-content-wrap">
-                        <div class="container post-content-sm">
-                            <div class="post-meta">
-                                <p>{{artikel.isi|truncatewords:20|safe}}</p>
-                                <a href="#">{{artikel.published}}</a>
+<section class="mt-2">
+    <!-- Search -->
+    {% include 'snippets/search.html' %}
+</section>
+
+<section>
+    <div class="container text-center">
+        <hr>
+        <h2>Recent Post</h2>
+        <hr>
+    </div>
+    <div class="blog-area">
+        <div class="container">
+            <div class="row">
+                {% for artikel in last_artikel %}
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="shadow">
+                        <div class="single-post-area">
+                            <!-- Post Thumbnail -->
+                            <a href="{% url 'blog:detail' artikel.slug %}" class="post-thumbnail"><img
+                                    src="{{artikel.thumbnail.url}}" alt=""></a>
+                            <!-- Post Catagory -->
+                            <a href="{% url 'blog:category' artikel.kategori.slug 1 %}"
+                                class="btn post-catagory">{{artikel.kategori}}</a>
+                        </div>
+                        <div class="post-content-wrap">
+                            <div class="container post-content-sm">
+                                <div class="post-meta">
+                                    <p>{{artikel.isi|truncatewords:20|safe}}</p>
+                                    <a href="#">{{artikel.published}}</a>
+                                </div>
+                                <a href="{% url 'blog:detail' artikel.slug %}" class="post-title">{{artikel.judul}}</a>
                             </div>
-                            <a href="{% url 'blog:detail' artikel.slug %}" class="post-title">{{artikel.judul}}</a>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
     </div>
-</div>
+</section>
 
-<div class="container text-center">
-    <hr>
-    <h2>Category</h2>
-    <hr>
-</div>
-<div class="container w-50 m-auto">
-    <div class="row">
-        <div class="col-12 text-center">
-            {% for artikel in last_artikel %}
-            <a href="{% url 'blog:category' artikel.kategori.slug 1 %}" class="btn btn-outline-dark btn-category m-2">
-                {{artikel.kategori|upper}} </a>
-            {% endfor %}
+<section>
+    <div class="container text-center">
+        <hr>
+        <h2>Category</h2>
+        <hr>
+    </div>
+    <div class="container w-50 m-auto">
+        <div class="row">
+            <div class="col-12 text-center">
+                {% for artikel in last_artikel %}
+                <a href="{% url 'blog:category' artikel.kategori.slug 1 %}"
+                    class="btn btn-outline-dark btn-category m-2">
+                    {{artikel.kategori|upper}} </a>
+                {% endfor %}
+            </div>
         </div>
     </div>
-</div>
+</section>

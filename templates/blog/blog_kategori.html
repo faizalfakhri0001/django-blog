@@ -7,113 +7,124 @@
 
 
 {% block content %}
-<div class="container text-center mt-4">
-    <hr>
+<section class="mt-2">
+    <!-- Search -->
+    {% include 'snippets/search.html' %}
+</section>
 
-    <h2>{{slug|upper}}</h2>
+<section>
+    <div class="container text-center mt-4">
+        <hr>
 
-    <hr>
-</div>
+        <h2>{{slug|upper}}</h2>
 
-<div class="blog-area">
-    <div class="container">
-        <div class="row">
-            {% for artikel in artikels %}
-            {% if forloop.counter == 1 %}
-            <div class="col-12 col-lg-6">
-                <div class="single-post-area">
-                    <a href="#" class="post-thumbnail"><img src="{{artikel.thumbnail.url}}" alt=""></a>
-                    <a href="{% url 'blog:category' artikel.kategori.slug 1 %}"
-                        class="btn post-catagory">{{artikel.kategori}}</a>
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <a href="#">{{artikel.published}}</a>
-                        </div>
-                        <a href="{% url 'blog:detail' artikel.slug %}" class="post-title">{{artikel.judul}}</a>
-                    </div>
-                </div>
-            </div>
-            {% else %}
-            <div class="col-12 col-sm-6 col-lg-3">
-                <div class="shadow">
+        <hr>
+    </div>
+
+    <div class="blog-area">
+        <div class="container">
+            <div class="row">
+                {% for artikel in artikels %}
+                {% if forloop.counter == 1 %}
+                <div class="col-12 col-lg-6">
                     <div class="single-post-area">
-                        <!-- Post Thumbnail -->
-                        <a href="{% url 'blog:detail' artikel.slug %}" class="post-thumbnail"><img
-                                src="{{artikel.thumbnail.url}}" alt=""></a>
-                        <!-- Post Catagory -->
+                        <a href="#" class="post-thumbnail"><img src="{{artikel.thumbnail.url}}" alt=""></a>
                         <a href="{% url 'blog:category' artikel.kategori.slug 1 %}"
                             class="btn post-catagory">{{artikel.kategori}}</a>
-                    </div>
-                    <div class="post-content-wrap">
-                        <!-- Post Conetent -->
-                        <div class="container post-content-sm">
+                        <div class="post-content">
                             <div class="post-meta">
-                                {{artikel.isi|truncatewords:12|safe}}
-                                <br>
                                 <a href="#">{{artikel.published}}</a>
                             </div>
                             <a href="{% url 'blog:detail' artikel.slug %}" class="post-title">{{artikel.judul}}</a>
                         </div>
                     </div>
                 </div>
-            </div>
-            {% endif %}
-            {% endfor %}
-
-            {% if is_paginated %}
-            <div class="col-12">
-                <div class="d-flex justify-content-center w-100">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            {% if page_obj.has_previous %}
-                            <li class="page-item">
-                                <a class="page-link" href="{% url 'blog:list' page_obj.previous_page_number %}"
-                                    aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                            </li>
-                            {% endif %}
-
-
-                            {% for page in paginator.page_range %}
-                            <li class="page-item"><a class="page-link" href="{% url 'blog:list' page %}">{{page}}</a>
-                            </li>
-                            {% endfor %}
-
-                            {% if page_obj.has_next %}
-                            <li class="page-item">
-                                <a class="page-link" href="{% url 'blog:list' page_obj.next_page_number %}"
-                                    aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </li>
-                            {% endif %}
-                        </ul>
-                    </nav>
+                {% else %}
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="shadow">
+                        <div class="single-post-area">
+                            <!-- Post Thumbnail -->
+                            <a href="{% url 'blog:detail' artikel.slug %}" class="post-thumbnail"><img
+                                    src="{{artikel.thumbnail.url}}" alt=""></a>
+                            <!-- Post Catagory -->
+                            <a href="{% url 'blog:category' artikel.kategori.slug 1 %}"
+                                class="btn post-catagory">{{artikel.kategori}}</a>
+                        </div>
+                        <div class="post-content-wrap">
+                            <!-- Post Conetent -->
+                            <div class="container post-content-sm">
+                                <div class="post-meta">
+                                    {{artikel.isi|truncatewords:12|safe}}
+                                    <br>
+                                    <a href="#">{{artikel.published}}</a>
+                                </div>
+                                <a href="{% url 'blog:detail' artikel.slug %}" class="post-title">{{artikel.judul}}</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                {% endif %}
+                {% endfor %}
+
+                {% if is_paginated %}
+                <div class="col-12">
+                    <div class="d-flex justify-content-center w-100">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                {% if page_obj.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="{% url 'blog:list' page_obj.previous_page_number %}"
+                                        aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+                                {% endif %}
+
+
+                                {% for page in paginator.page_range %}
+                                <li class="page-item"><a class="page-link"
+                                        href="{% url 'blog:list' page %}">{{page}}</a>
+                                </li>
+                                {% endfor %}
+
+                                {% if page_obj.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="{% url 'blog:list' page_obj.next_page_number %}"
+                                        aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                {% endif %}
             </div>
-            {% endif %}
         </div>
     </div>
-</div>
+</section>
 
-<div class="container text-center">
-    <hr>
-    <h2>Category</h2>
-    <hr>
-</div>
+<section>
+    <div class="container text-center">
+        <hr>
+        <h2>Category</h2>
+        <hr>
+    </div>
 
 
-<div class="container w-50 m-auto">
-    <div class="row">
-        <div class="col-12 text-center">
-            {% for cat in kategori_list %}
-            <a href="{% url 'blog:category' cat 1 %}" class="btn btn-outline-dark btn-category m-2">
-                {{cat|upper}} </a>
-            {% endfor %}
+    <div class="container w-50 m-auto">
+        <div class="row">
+            <div class="col-12 text-center">
+                {% for cat in kategori_list %}
+                <a href="{% url 'blog:category' cat 1 %}" class="btn btn-outline-dark btn-category m-2">
+                    {{cat|upper}} </a>
+                {% endfor %}
+            </div>
         </div>
     </div>
-</div>
+</section>
+
 {% endblock content %}
